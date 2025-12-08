@@ -29,7 +29,7 @@ pipeline {
                         // PIP_INDEX_URL env var is automatically picked up by pip
                         sh './venv/bin/python -m pip --version'
                         // sh './venv/bin/python -m pip install --upgrade pip'
-                        sh './venv/bin/python -m pip install -r requirements.txt'
+                        sh './venv/bin/python -m pip install -vvv -r requirements.txt'
                         
                         // Run the script
                         sh './venv/bin/python main.py'
