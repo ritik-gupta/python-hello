@@ -27,7 +27,8 @@ pipeline {
                         
                         // Install dependencies
                         // PIP_INDEX_URL env var is automatically picked up by pip
-                        sh './venv/bin/python -m pip install --upgrade pip'
+                        sh './venv/bin/python -m pip --version'
+                        // sh './venv/bin/python -m pip install --upgrade pip'
                         sh './venv/bin/python -m pip install -r requirements.txt'
                         
                         // Run the script
