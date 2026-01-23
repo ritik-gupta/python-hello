@@ -6,7 +6,7 @@ pipeline {
         ARTIFACTORY_CREDS = credentials('7e59b761-7e86-402e-bc24-a194c787a656')
         // Update this URL with your actual Python repository name in Artifactory
         // typically .../api/pypi/<repo-key>/simple
-        ARTIFACTORY_URL = "jfrog.commercialdev.dev.veedna.com/artifactory/api/pypi/gos-all-python/simple"
+        ARTIFACTORY_URL = "jfrog.commercialdev.dev.veedna.com/artifactory/api/pypi/gos-all-proxy-python/simple"
     }
 
     stages {
@@ -19,6 +19,7 @@ pipeline {
                     
                     withEnv(["PIP_INDEX_URL=${pipIndexUrl}"]) {
                          // Optional: Create a virtual environment
+                        sh 'rm -rf venv'
                         sh 'python3 -m venv venv'
                         
                         // Windows typically uses venv\Scripts\activate, Linux uses . venv/bin/activate
@@ -29,7 +30,8 @@ pipeline {
                         // PIP_INDEX_URL env var is automatically picked up by pip
                         sh './venv/bin/python -m pip --version'
                         // sh './venv/bin/python -m pip install --upgrade pip'
-                        sh './venv/bin/python -m pip install -vvv -r requirements.txt'
+                        sh './venv/bin/python -m pip cache purge'
+                        sh './venv/bin/python -m pip install -vvv --no-cache-dir --index-url "${PIP_INDEX_URL}" --trusted-host jfrog.commercialdev.dev.veedna.com -r requirements.txt'
                         
                         // Run the script
                         sh './venv/bin/python main.py'
