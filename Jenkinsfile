@@ -29,7 +29,8 @@ pipeline {
                         // PIP_INDEX_URL env var is automatically picked up by pip
                         sh './venv/bin/python -m pip --version'
                         // sh './venv/bin/python -m pip install --upgrade pip'
-                        sh './venv/bin/python -m pip install -vvv --index-url "${PIP_INDEX_URL}" -r requirements.txt'
+                        sh './venv/bin/python -m pip cache purge'
+                        sh './venv/bin/python -m pip install -vvv --no-cache-dir --index-url "${PIP_INDEX_URL}" -r requirements.txt'
                         
                         // Run the script
                         sh './venv/bin/python main.py'
