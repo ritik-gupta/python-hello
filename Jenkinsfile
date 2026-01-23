@@ -19,6 +19,7 @@ pipeline {
                     
                     withEnv(["PIP_INDEX_URL=${pipIndexUrl}"]) {
                          // Optional: Create a virtual environment
+                        sh 'rm -rf venv'
                         sh 'python3 -m venv venv'
                         
                         // Windows typically uses venv\Scripts\activate, Linux uses . venv/bin/activate
