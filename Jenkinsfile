@@ -3,10 +3,10 @@ pipeline {
 
     environment {
         // Using the same credentials ID as the Maven/NPM project
-        ARTIFACTORY_CREDS = credentials('StagingPwd')
+        ARTIFACTORY_CREDS = credentials('LinUsrPwd')
         // Update this URL with your actual Python repository name in Artifactory
         // typically .../api/pypi/<repo-key>/simple
-        ARTIFACTORY_URL = "enforce.fortknox.commercialstaging.dev.veedna.com/artifactory/api/pypi/gos-all-proxy-python/simple"
+        ARTIFACTORY_URL = "enforce.fortknox.commercialdev.dev.veedna.com/artifactory/api/pypi/gos-all-proxy-python/simple"
     }
 
     stages {
